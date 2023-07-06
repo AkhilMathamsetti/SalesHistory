@@ -1,5 +1,6 @@
 package com.cg.sales.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.sales.DTO.SalesResponse;
 import com.cg.sales.entity.Sales;
 import com.cg.sales.service.SalesService;
 
@@ -28,5 +30,11 @@ public class SalesController {
 		List<Sales> allSales = salesService.getAllSales();
 		ResponseEntity<List<Sales>> re = new ResponseEntity<List<Sales>>(allSales, HttpStatus.OK);
 		return re;
+	}
+	
+	@GetMapping(value="/s")
+	public ResponseEntity<List<BigDecimal>> getSales(){
+		List<BigDecimal> sales = salesService.getProductsByAmountSold();
+		return new ResponseEntity<List<BigDecimal>>(sales, HttpStatus.OK);
 	}
 }

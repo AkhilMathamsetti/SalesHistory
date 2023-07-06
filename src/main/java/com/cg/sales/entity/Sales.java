@@ -56,6 +56,6 @@ public class Sales {
 	@Column(name="quantity_sold")
 	private int quantitySold;
 	
-	@Column(name="amount_sold",precision=10,scale=2)
+	@Column(name="amount_sold")
 	private BigDecimal amountSold;
 }

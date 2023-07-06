@@ -15,16 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.sales.DTO.SalesResponse;
 import com.cg.sales.entity.Product;
+import com.cg.sales.entity.Sales;
 import com.cg.sales.repository.ProductRepository;
 import com.cg.sales.service.ProductService;
+import com.cg.sales.service.SalesService;
 
 @RestController
 @RequestMapping("/api/v1")
 public class ProductController {
 
 	private ProductService productService;
-	private ProductRepository productRepository;
+	private SalesService salesService;
 	
 	@Autowired
 	public void setProductService(ProductService productService) {
@@ -32,8 +35,8 @@ public class ProductController {
 	}
 	
 	@Autowired
-	public void setProductRepository(ProductRepository productRepository) {
-		this.productRepository = productRepository;
+	public void setSalesService(SalesService salesService) {
+		this.salesService = salesService;
 	}
 	
 	/*
@@ -137,6 +140,11 @@ public class ProductController {
 	/*
 	 * Get List of Products Channel wise sold products
 	 */
+//	@GetMapping(value="/products/channel")
+//	public ResponseEntity<List<Sales>> getProductsByChannel(){
+//		List<Sales> products = salesService.getProductsByChannel();
+//		return ResponseEntity.ok(products);
+//	}
 	
 	/*
 	 * Get list of products order by query field
