@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.sales.dto.CustomerResponse;
 import com.cg.sales.entity.Customer;
 import com.cg.sales.repository.CustomerRepository;
 import com.cg.sales.service.CustomerService;
@@ -145,12 +144,5 @@ public class CustomerController {
 		Customer updatedCustomer= customerService.updateCustomerCreditLimit(custId, customer);
 		return updatedCustomer;
 	}
-	
-	@GetMapping(value="/csutomers/getAllInformation")
-	public List<CustomerResponse> getAllInformation(){
-		return customerRepository.getInformation();
-	}
-	
-	
 	
 }
