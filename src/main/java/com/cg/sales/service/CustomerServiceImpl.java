@@ -37,11 +37,22 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public List<Customer> searchCustomerByFirstname(String custFirstName) {
+		List<Customer> customer=customerRepository.findByCustFirstName(custFirstName);
+		if(customer.isEmpty()==true) {
+			throw new CustomerNotFoundException("Customer with Firstname: "+custFirstName+" not available ");
+		}
 		return customerRepository.findByCustFirstName(custFirstName);
 	}
 
+	
+	
 	@Override
 	public List<Customer> searchCustomerByCity(String custCity) {
+		List<Customer> customer=customerRepository.findByCustCity(custCity);
+		if(customer.isEmpty()==true) {
+			throw new CustomerNotFoundException("Customer with City: "+custCity+" not available ");
+		}
+		
 		return customerRepository.findByCustCity(custCity);
 	}
 	
