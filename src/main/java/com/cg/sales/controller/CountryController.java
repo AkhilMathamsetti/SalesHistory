@@ -14,23 +14,45 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.sales.DTO.CustomerCountRegion;
 import com.cg.sales.entity.Countries;
+import com.cg.sales.repository.CountriesRepository;
+import com.cg.sales.repository.SalesRepository;
 import com.cg.sales.service.CountriesService;
+import com.cg.sales.service.CustomerService;
+import com.cg.sales.service.SalesService;
 
 @RestController
 @RequestMapping(value="/api/v1")
 public class CountryController {
 
 	private CountriesService countryService;
+	private CustomerService customerService;
+	private CountriesRepository countriesRepository;
 	
 	@Autowired
 	public void setCountryService(CountriesService countryService) {
 		this.countryService = countryService;
 	}
+	
+	@Autowired
+	public void setCustomerService(CustomerService customerService) {
+		this.customerService = customerService;
+	}
 
+	@Autowired
+	public void setCountriesRepository(CountriesRepository countriesRepository) {
+		this.countriesRepository = countriesRepository;
+	}
+	
+	/*
+	 * Instance Variables
+	 */
+	String str = null;
 	
 	/*
 	 * Getting All Countries
@@ -69,10 +91,24 @@ public class CountryController {
 		countryService.deleteCountry(countryId);
 	}
 	
-	@GetMapping(value="/count")
-	public ResponseEntity<Map<String, Integer>> getCount(){
-		Map<String, Integer> counts = countryService.getCount();
-		return ResponseEntity.ok(counts);
+	@GetMapping(value="/countries/count")
+	public ResponseEntity<Map<String,Integer>> getCustomerCountByCountry(){
+		Map<String,Integer> customerCountMap =  countryService.getCustomerCountByCountry();
+		return ResponseEntity.ok(customerCountMap);
+	}
+	
+	
+	@SuppressWarnings("unlikely-arg-type")
+	@GetMapping(value="/countries/{region}/customers")
+	@ResponseBody
+	public List<CustomerCountRegion> getCustomersCountByRegion(@PathVariable(value="region") String region){
+		List<Countries> allCountries = countriesRepository.findAll(); 
+		if(allCountries.contains(region)) {
+			str = "Record displayed";
+		}else {
+			str = "Record not found";
+		}
+		return countriesRepository.getCustomersCountByRegion(region);
 	}
 	
 }

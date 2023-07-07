@@ -19,4 +19,6 @@ public interface ProductService {
 	public List<Product> searchAllDuplicateProducts();
 	
 	public List<Product> getStatusOfSoldProducts(Integer prodId);
+	
+	public List<Object[]> getProductsByChannel();
 }

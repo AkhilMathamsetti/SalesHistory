@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.sales.DTO.SalesQtysCategory;
 import com.cg.sales.DTO.SalesResponse;
 import com.cg.sales.entity.Sales;
+import com.cg.sales.repository.SalesRepository;
 import com.cg.sales.service.SalesService;
 
 @RestController
@@ -19,10 +23,16 @@ import com.cg.sales.service.SalesService;
 public class SalesController {
 
 	private SalesService salesService;
+	private SalesRepository salesRepository;
 	
 	@Autowired
 	public void setSalesService(SalesService salesService) {
 		this.salesService = salesService;
+	}
+	
+	@Autowired
+	public void setSalesRepository(SalesRepository salesRepository) {
+		this.salesRepository = salesRepository;
 	}
 	
 	@GetMapping(value="")
@@ -33,8 +43,32 @@ public class SalesController {
 	}
 	
 	@GetMapping(value="/s")
-	public ResponseEntity<List<BigDecimal>> getSales(){
-		List<BigDecimal> sales = salesService.getProductsByAmountSold();
-		return new ResponseEntity<List<BigDecimal>>(sales, HttpStatus.OK);
+	public ResponseEntity<List<Integer>> getSales(){
+		List<Integer> sales = salesService.getById();
+		return new ResponseEntity<List<Integer>>(sales, HttpStatus.OK);
 	}
+	
+	@GetMapping(value="/{quarter}")
+	public ResponseEntity<List<Sales>> getSalesByQuarter(@RequestParam(value="quarter") int quarter){
+		List<Sales> salesList = salesService.getSalesByQuater(quarter);
+		return ResponseEntity.ok(salesList);
+	}
+	
+	@GetMapping(value="/{date}")
+	public ResponseEntity<List<Sales>> getSalesByDate(@RequestParam(value="date") int date){
+		List<Sales> salesList = salesService.getSalesByDate(date);
+		return ResponseEntity.ok(salesList);
+	}
+	
+//	@GetMapping(value="/qtys/categorywise")
+//	public ResponseEntity<List<Object[]>> getSalesQuantitesByCategory(){
+//		List<Object[]> allSales = salesService.getSalesQuantitiesByCategory();
+//		return ResponseEntity.ok(allSales);
+//	}
+	
+	@GetMapping(value="/qtys/categorywise")
+	public List<SalesQtysCategory> getSalesQuantitesByCategory(){
+		return salesRepository.getSalesQuantitesByCategory();
+	}
+	
 }

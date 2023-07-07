@@ -32,7 +32,7 @@ public class Sales {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="sales_id")
 	private int salesId;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="prod_id")
 	private Product product;

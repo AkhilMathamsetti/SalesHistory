@@ -36,6 +36,7 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@NotNull(message = "Customer Id may not be null")
+	@Column(name="cust_id")
 	private int custId;
 	
 	@Column(name="cust_first_name",columnDefinition = "varchar(20)")
@@ -77,7 +78,7 @@ public class Customer {
 	@NotNull(message = "State Province may not be null")
 	private int custStateProvinceId;
 	
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="country_id")
 	@NotNull(message="Country Id may not be null")
 	private Countries country;

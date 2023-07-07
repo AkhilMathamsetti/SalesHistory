@@ -116,4 +116,9 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findByProdId(prodId);
 	}
 
+	@Override
+	public List<Object[]> getProductsByChannel() {
+		return productRepository.getProductsByChannel();
+	}
+
 }

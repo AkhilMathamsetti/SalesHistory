@@ -28,6 +28,7 @@ public class ProductController {
 
 	private ProductService productService;
 	private SalesService salesService;
+	private ProductRepository productRepository;
 	
 	@Autowired
 	public void setProductService(ProductService productService) {
@@ -37,6 +38,11 @@ public class ProductController {
 	@Autowired
 	public void setSalesService(SalesService salesService) {
 		this.salesService = salesService;
+	}
+	
+	@Autowired
+	public void setProductRepository(ProductRepository productRepository) {
+		this.productRepository = productRepository;
 	}
 	
 	/*
@@ -140,15 +146,21 @@ public class ProductController {
 	/*
 	 * Get List of Products Channel wise sold products
 	 */
-//	@GetMapping(value="/products/channel")
-//	public ResponseEntity<List<Sales>> getProductsByChannel(){
-//		List<Sales> products = salesService.getProductsByChannel();
-//		return ResponseEntity.ok(products);
-//	}
+	@GetMapping(value="/products/channel")
+	public ResponseEntity<List<Object[]>> getProductsByChannel(){
+		List<Object[]> products = productService.getProductsByChannel();
+		return ResponseEntity.ok(products);
+	}
 	
 	/*
 	 * Get list of products order by query field
 	 */
-	
+	/*
+	@GetMapping(value="/products/sort/{field}")
+	public ResponseEntity<List<Product>> getSortProductsByField(@PathVariable(value="field") String field){
+		List<Product> allProducts = productRepository.getSortProductsByField(field);
+		return ResponseEntity.ok(allProducts);
+	}
+	*/
 	
 }

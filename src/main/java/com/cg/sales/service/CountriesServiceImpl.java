@@ -1,5 +1,6 @@
 package com.cg.sales.service;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,21 +69,16 @@ public class CountriesServiceImpl implements CountriesService {
 		
 	}
 
-	
 	@Override
-	public Map<String,Integer> getCount() {
-		List<Customer> allCustomers = customerRepository.findAll();
-		Map<String, Integer> countryCountMap = new HashMap<>();
-		
-		for(Customer customer : allCustomers) {
-			Countries country = customer.getCountry();
-			if(country != null) {
-				String countryName = country.getCountryName();
-				countryCountMap.put(countryName, countryCountMap.getOrDefault(countryCountMap,(int) 0L)+1);
-			}
+	public Map<String, Integer> getCustomerCountByCountry() {
+		List<Object[]> result = customerRepository.getCustomerCountByCountry();
+		Map<String, Integer> customerCountMap = new HashMap<>();
+		for(Object[] row : result) {
+			String countryName = (String) row[0];
+			Long customerCount = (Long) row[1];
+			customerCountMap.put(countryName,customerCount.intValue());
 		}
-		return countryCountMap;
+		
+		return customerCountMap;
 	}
-	
-
 }

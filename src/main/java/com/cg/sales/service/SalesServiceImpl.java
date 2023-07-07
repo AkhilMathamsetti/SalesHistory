@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.sales.DTO.SalesQtysCategory;
 import com.cg.sales.DTO.SalesResponse;
 import com.cg.sales.entity.Product;
 import com.cg.sales.entity.Sales;
@@ -27,8 +28,23 @@ public class SalesServiceImpl implements SalesService {
 	}
 	
 	@Override
-	public List<BigDecimal> getProductsByAmountSold() {
+	public List<Integer> getById() {
 		return salesRepository.findAllList();
 	}
+
+	@Override
+	public List<Sales> getSalesByQuater(int quarter) {
+		return salesRepository.getSalesByQuater(quarter);
+	}
+
+	@Override
+	public List<Sales> getSalesByDate(int date) {
+		return salesRepository.getSalesByDate(date);
+	}
+
+//	@Override
+//	public List<Object[]> getSalesQuantitiesByCategory() {
+//		return salesRepository.getSalesQuantitesByCategory();
+//	}
 
 }
