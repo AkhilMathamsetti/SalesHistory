@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.sales.DTO.SalesQtysCategory;
+import com.cg.sales.DTO.SalesQtysCategoryYear;
 import com.cg.sales.DTO.SalesResponse;
+import com.cg.sales.DTO.SalesSoldCategory;
+import com.cg.sales.DTO.SalesSoldCategoryYear;
 import com.cg.sales.entity.Sales;
 import com.cg.sales.repository.SalesRepository;
 import com.cg.sales.service.SalesService;
@@ -60,15 +63,24 @@ public class SalesController {
 		return ResponseEntity.ok(salesList);
 	}
 	
-//	@GetMapping(value="/qtys/categorywise")
-//	public ResponseEntity<List<Object[]>> getSalesQuantitesByCategory(){
-//		List<Object[]> allSales = salesService.getSalesQuantitiesByCategory();
-//		return ResponseEntity.ok(allSales);
-//	}
-	
 	@GetMapping(value="/qtys/categorywise")
 	public List<SalesQtysCategory> getSalesQuantitesByCategory(){
 		return salesRepository.getSalesQuantitesByCategory();
+	}
+	
+	@GetMapping(value="/qtys/categorywise/{year}")
+	public List<SalesQtysCategoryYear> getSalesQuantitesByCategoryYear(@PathVariable("year") int year){
+		return salesRepository.getSalesQuantitiesByCategoryYear(year);
+	}
+	
+	@GetMapping(value="/sold/categorywise")
+	public List<SalesSoldCategory> getSalesSoldByCategory(){
+		return salesRepository.getSalesSoldCategory();
+	}
+	
+	@GetMapping(value="/sold/categorywise/{year}")
+	public List<SalesSoldCategoryYear> getSalesSoldByCategoryYear(@PathVariable("year") int year){
+		return salesRepository.getSalesSoldCategoryYear(year);
 	}
 	
 }

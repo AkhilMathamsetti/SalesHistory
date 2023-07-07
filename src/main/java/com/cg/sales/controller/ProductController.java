@@ -4,6 +4,7 @@ package com.cg.sales.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -155,12 +156,11 @@ public class ProductController {
 	/*
 	 * Get list of products order by query field
 	 */
-	/*
 	@GetMapping(value="/products/sort/{field}")
-	public ResponseEntity<List<Product>> getSortProductsByField(@PathVariable(value="field") String field){
-		List<Product> allProducts = productRepository.getSortProductsByField(field);
-		return ResponseEntity.ok(allProducts);
+	public ResponseEntity<List<Product>> getSortProductsByField(@PathVariable("field") String sortField){
+		Sort sort = Sort.by(sortField);
+		List<Product> productsList = productRepository.findAll(sort);
+		return ResponseEntity.ok(productsList);
 	}
-	*/
 	
 }

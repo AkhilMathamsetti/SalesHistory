@@ -22,8 +22,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query("select ch.channelId, p.prodName,c.custFirstName AS CustomerName FROM Sales s JOIN Channel ch ON s.channel.channelId = ch.channelId JOIN Product p ON s.product.prodId = p.prodId JOIN Customer c ON s.customer.custId = c.custId ORDER BY ch.channelId")
 	List<Object[]> getProductsByChannel();
 	
-	/*
-	@Query("SELECT p FROM Product p ORDER BY = :field")
-	List<Product> getSortProductsByField(@Param("field") String field);
-	*/
+	@Query("SELECT p FROM Product p ORDER BY :sortField DESC")
+	public List<Product> getSortProductsByField(@Param("sortField") String field);
 }
