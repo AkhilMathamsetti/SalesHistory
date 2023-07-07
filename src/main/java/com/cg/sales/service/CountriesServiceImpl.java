@@ -1,6 +1,5 @@
 package com.cg.sales.service;
 
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.sales.entity.Countries;
-import com.cg.sales.entity.Customer;
 import com.cg.sales.exception.CountryNotFoundException;
 import com.cg.sales.repository.CountriesRepository;
 import com.cg.sales.repository.CustomerRepository;
