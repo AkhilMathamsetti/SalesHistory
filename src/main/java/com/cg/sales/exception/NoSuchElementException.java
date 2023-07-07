@@ -1,6 +1,6 @@
 package com.cg.sales.exception;
 
-public class NoSuchElementException extends Exception {
+public class NoSuchElementException extends RuntimeException {
 
 	/**
 	 * 
