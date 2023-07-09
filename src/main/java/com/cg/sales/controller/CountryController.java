@@ -21,27 +21,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.sales.DTO.CustomerCountRegion;
 import com.cg.sales.entity.Countries;
 import com.cg.sales.repository.CountriesRepository;
-import com.cg.sales.repository.SalesRepository;
 import com.cg.sales.service.CountriesService;
-import com.cg.sales.service.CustomerService;
-import com.cg.sales.service.SalesService;
 
 @RestController
 @RequestMapping(value="/api/v1")
 public class CountryController {
 
 	private CountriesService countryService;
-	private CustomerService customerService;
 	private CountriesRepository countriesRepository;
 	
 	@Autowired
 	public void setCountryService(CountriesService countryService) {
 		this.countryService = countryService;
-	}
-	
-	@Autowired
-	public void setCustomerService(CustomerService customerService) {
-		this.customerService = customerService;
 	}
 
 	@Autowired

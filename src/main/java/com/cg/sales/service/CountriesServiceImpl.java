@@ -61,7 +61,6 @@ public class CountriesServiceImpl implements CountriesService {
 
 	@Override
 	public void deleteCountry(Integer countryId) {
-		// TODO Auto-generated method stub
 		Countries country=getCountry(countryId);
 		countriesRepository.deleteById(country.getCountryId());
 		

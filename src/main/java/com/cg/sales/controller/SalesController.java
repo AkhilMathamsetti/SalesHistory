@@ -1,6 +1,5 @@
 package com.cg.sales.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.sales.DTO.SalesQtysCategory;
 import com.cg.sales.DTO.SalesQtysCategoryYear;
-import com.cg.sales.DTO.SalesResponse;
 import com.cg.sales.DTO.SalesSoldCategory;
 import com.cg.sales.DTO.SalesSoldCategoryYear;
 import com.cg.sales.entity.Sales;
+import com.cg.sales.exception.SalesNotFoundException;
 import com.cg.sales.repository.SalesRepository;
 import com.cg.sales.service.SalesService;
 
@@ -45,21 +44,22 @@ public class SalesController {
 		return re;
 	}
 	
-	@GetMapping(value="/s")
-	public ResponseEntity<List<Integer>> getSales(){
-		List<Integer> sales = salesService.getById();
-		return new ResponseEntity<List<Integer>>(sales, HttpStatus.OK);
-	}
 	
 	@GetMapping(value="/{quarter}")
 	public ResponseEntity<List<Sales>> getSalesByQuarter(@RequestParam(value="quarter") int quarter){
 		List<Sales> salesList = salesService.getSalesByQuater(quarter);
+		if(salesList.isEmpty()) {
+			throw new SalesNotFoundException("Sale with given quarter: "+quarter+",is not avialable");
+		}
 		return ResponseEntity.ok(salesList);
 	}
 	
 	@GetMapping(value="/{date}")
 	public ResponseEntity<List<Sales>> getSalesByDate(@RequestParam(value="date") int date){
 		List<Sales> salesList = salesService.getSalesByDate(date);
+		if(salesList.isEmpty()) {
+			throw new SalesNotFoundException("Sale with given date: "+date+",is not avialable");
+		}
 		return ResponseEntity.ok(salesList);
 	}
 	
@@ -70,6 +70,10 @@ public class SalesController {
 	
 	@GetMapping(value="/qtys/categorywise/{year}")
 	public List<SalesQtysCategoryYear> getSalesQuantitesByCategoryYear(@PathVariable("year") int year){
+		List<SalesQtysCategoryYear> salesList = salesRepository.getSalesQuantitiesByCategoryYear(year);
+		if(salesList.isEmpty()) {
+			throw new SalesNotFoundException("Sale with given quarter: "+year+",is not avialable");
+		}
 		return salesRepository.getSalesQuantitiesByCategoryYear(year);
 	}
 	
@@ -80,6 +84,10 @@ public class SalesController {
 	
 	@GetMapping(value="/sold/categorywise/{year}")
 	public List<SalesSoldCategoryYear> getSalesSoldByCategoryYear(@PathVariable("year") int year){
+		List<SalesSoldCategoryYear> salesList = salesRepository.getSalesSoldCategoryYear(year);
+		if(salesList.isEmpty()) {
+			throw new SalesNotFoundException("Sale with given quarter: "+year+",is not avialable");
+		}
 		return salesRepository.getSalesSoldCategoryYear(year);
 	}
 	

@@ -21,7 +21,7 @@ public interface SalesRepository extends JpaRepository<Sales, Integer> {
 	//@Query("SELECT s.salesId, p.prodId, c.channelId FROM Sales s JOIN Product p ON p.prodId = s.prodId JOIN Channel c ON c.channelId = s.channelId ORDER BY salesId")
 	List<Integer> findAllList();
 	
-	@Query("SELECT s FROM Sales s JOIN Time t ON s.time.timeId = t.timeId WHERE t.calendarMonthInt = :quarter")
+	@Query("SELECT s FROM Sales s JOIN Time t ON s.time.timeId = t.timeId WHERE t.calenderQuarterInt = :quarter")
 	List<Sales> getSalesByQuater(@Param("quarter") int quarter);
 	
 	@Query("SELECT s FROM Sales s JOIN Time t ON s.time.timeId = t.timeId WHERE t.dayIntInMonth = :date")

@@ -1,14 +1,10 @@
 package com.cg.sales.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.sales.DTO.SalesQtysCategory;
-import com.cg.sales.DTO.SalesResponse;
-import com.cg.sales.entity.Product;
 import com.cg.sales.entity.Sales;
 import com.cg.sales.repository.SalesRepository;
 
@@ -41,10 +37,5 @@ public class SalesServiceImpl implements SalesService {
 	public List<Sales> getSalesByDate(int date) {
 		return salesRepository.getSalesByDate(date);
 	}
-
-//	@Override
-//	public List<Object[]> getSalesQuantitiesByCategory() {
-//		return salesRepository.getSalesQuantitesByCategory();
-//	}
 
 }

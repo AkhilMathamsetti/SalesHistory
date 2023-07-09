@@ -1,7 +1,6 @@
 package com.cg.sales.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -116,28 +113,5 @@ public class Customer {
 	@Column(name="cust_valid",columnDefinition = "varchar(1)")
 	private String custValid;
 	
-//	@ManyToMany(cascade = CascadeType.DETACH)
-//	@JoinTable(name="sales",
-//			joinColumns = {@JoinColumn(name = "custId")},
-//            inverseJoinColumns = {@JoinColumn(name = "prodId")})
-//	private List<Product> products;
-//	
-//	@ManyToMany(cascade = CascadeType.DETACH)
-//	@JoinTable(name="sales",
-//			joinColumns = {@JoinColumn(name = "custId")},
-//            inverseJoinColumns = {@JoinColumn(name = "channelId")})
-//	private List<Channel> channels;
-//	
-//	@ManyToMany(cascade = CascadeType.DETACH)
-//	@JoinTable(name="sales",
-//			joinColumns = {@JoinColumn(name = "custId")},
-//            inverseJoinColumns = {@JoinColumn(name = "timeId")})
-//	private List<Time> time;
-//	
-//	@ManyToMany(cascade = CascadeType.DETACH)
-//	@JoinTable(name="sales",
-//			joinColumns = {@JoinColumn(name = "custId")},
-//            inverseJoinColumns = {@JoinColumn(name = "promoId")})
-//	private List<Promotion> promotions;
 }
 
