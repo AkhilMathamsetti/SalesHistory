@@ -88,12 +88,15 @@ public class CountryController {
 	
 	@GetMapping(value="/countries/count")
 	public ResponseEntity<Map<String,Integer>> getCustomerCountByCountry(){
+		List<Countries> allCountries = countriesRepository.findAll();
+		if(allCountries.isEmpty()) {
+			throw new CountryNotFoundException("Countries count is not available");
+		}
 		Map<String,Integer> customerCountMap =  countryService.getCustomerCountByCountry();
 		return ResponseEntity.ok(customerCountMap);
 	}
 	
 	
-	@SuppressWarnings("unlikely-arg-type")
 	@GetMapping(value="/countries/{region}/customers")
 	@ResponseBody
 	public List<CustomerCountRegion> getCustomersCountByRegion(@PathVariable(value="region") String region){

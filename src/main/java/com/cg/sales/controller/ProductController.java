@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.sales.entity.Product;
+import com.cg.sales.exception.ProductNotFoundException;
 import com.cg.sales.repository.ProductRepository;
 import com.cg.sales.service.ProductService;
 
@@ -92,9 +93,12 @@ public class ProductController {
 	 * Getting Products by Status
 	 */
 	@GetMapping(value="/products/{prodStatus}")
-	public ResponseEntity<List<Product>> getProductByStatus(@RequestParam(value="prodStatus") String prodCategory){
+	public ResponseEntity<List<Product>> getProductByStatus(@RequestParam(value="prodStatus") String prodStatus){
+		if(prodStatus != "STATUS") {
+			throw new ProductNotFoundException("No data available for "+prodStatus);
+		}
 		
-		List<Product> products = productService.searchAllProductsByStatus(prodCategory);
+		List<Product> products = productService.searchAllProductsByStatus(prodStatus);
 		return ResponseEntity.ok(products);
 	}
 	
@@ -103,7 +107,9 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/{prodSubcategory}")
 	public ResponseEntity<List<Product>> getProductBySubcategory(@RequestParam(value="prodSubcategory") String prodSubcategory){
-		
+		if(prodSubcategory ==  null) {
+			throw new ProductNotFoundException("No data available");
+		}
 		List<Product> products = productService.searchAllProductsBySubcategory(prodSubcategory);
 		return ResponseEntity.ok(products);
 	}
@@ -113,6 +119,9 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/{supplierId}")
 	public ResponseEntity<List<Product>> getProductBySupplierId(@RequestParam(value="supplierId") Integer supplierId){
+		if(supplierId ==  null) {
+			throw new ProductNotFoundException("Please enter valid Supplier Id");
+		}
 		
 		List<Product> products = productService.searchAllProductsBySupplierId(supplierId);
 		return ResponseEntity.ok(products);
@@ -131,6 +140,9 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/status/{prodId}")
 	public ResponseEntity<List<Product>> getSoldProducts(@RequestParam(value="prodId") Integer prodId){
+		if(prodId == null) {
+			throw new ProductNotFoundException("Please Enter valid Product Id");
+		}
 		List<Product> products = productService.getStatusOfSoldProducts(prodId);
 		return ResponseEntity.ok(products);
 	}
@@ -150,6 +162,9 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/sort/{field}")
 	public ResponseEntity<List<Product>> getSortProductsByField(@PathVariable("field") String sortField){
+		if(sortField == null) {
+			throw new ProductNotFoundException("Please enter valid Field String in the URL"); 
+		}
 		Sort sort = Sort.by(sortField);
 		List<Product> productsList = productRepository.findAll(sort);
 		return ResponseEntity.ok(productsList);
