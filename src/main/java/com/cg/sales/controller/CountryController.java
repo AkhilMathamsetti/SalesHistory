@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.sales.DTO.CustomerCountRegion;
 import com.cg.sales.entity.Countries;
+import com.cg.sales.exception.CountryNotFoundException;
 import com.cg.sales.repository.CountriesRepository;
 import com.cg.sales.service.CountriesService;
 
@@ -69,6 +70,9 @@ public class CountryController {
 	@PutMapping(value="/countries/{countryId}")
 	@ResponseStatus(value=HttpStatus.ACCEPTED,reason="Country details updated successfuly")
 	public Countries updateCounty(@PathVariable Integer countryId,@RequestBody Countries country){
+		if(countryId == null) {
+			throw new CountryNotFoundException("Please enter valid country ID");
+		}
 		Countries updatedCountry= countryService.updateCountry(countryId, country);
 		return updatedCountry;
 	}
@@ -95,7 +99,7 @@ public class CountryController {
 	public List<CustomerCountRegion> getCustomersCountByRegion(@PathVariable(value="region") String region){
 		List<Countries> allCountries = countriesRepository.findAll(); 
 		if(allCountries.contains(region)) {
-			str = "Record displayed";
+			str = "Record succssfully showed";
 		}else {
 			str = "Record not found";
 		}

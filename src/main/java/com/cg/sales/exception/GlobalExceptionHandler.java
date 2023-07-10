@@ -26,4 +26,12 @@ public class GlobalExceptionHandler {
 		return re;
 	}
 	
+	@ExceptionHandler(SalesNotFoundException.class)
+	public ResponseEntity<String> handleSalesNotFoundException(SalesNotFoundException snfe){
+		ResponseEntity<String> re = new ResponseEntity<String>(snfe.getMessage(),HttpStatus.NOT_FOUND);
+		return re;
+	}
+	
+	
+	
 }
