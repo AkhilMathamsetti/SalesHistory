@@ -3,6 +3,8 @@ package com.cg.sales.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -69,7 +71,7 @@ public class CountryController {
 	 */
 	@PutMapping(value="/countries/{countryId}")
 	@ResponseStatus(value=HttpStatus.ACCEPTED,reason="Country details updated successfuly")
-	public Countries updateCounty(@PathVariable Integer countryId,@RequestBody Countries country){
+	public Countries updateCounty(@Valid @PathVariable Integer countryId,@RequestBody Countries country){
 		if(countryId == null) {
 			throw new CountryNotFoundException("Please enter valid country ID");
 		}

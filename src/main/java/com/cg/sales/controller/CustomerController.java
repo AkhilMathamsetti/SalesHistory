@@ -2,6 +2,8 @@ package com.cg.sales.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +58,7 @@ public class CustomerController {
 	 */
 	@PutMapping(value = "/customers/{custId}")
 	@ResponseStatus(value=HttpStatus.ACCEPTED, reason="Customer details Updated")
-	public Customer updateCustomer(@PathVariable Integer custId,@RequestBody Customer customer){
+	public Customer updateCustomer(@Valid @PathVariable Integer custId,@RequestBody Customer customer){
 				
 		Customer updatedCustomer= customerService.updateCustomer(custId, customer);
 		
@@ -78,7 +80,7 @@ public class CustomerController {
 	 * Get Mapping for Customer by FirstName
 	 */
 	@GetMapping(value="/customers/{custFirstName}")
-	public ResponseEntity<List<Customer>> searchCustomerByFirstName(@RequestParam(value="custFirstName") String custFirstName){
+	public ResponseEntity<List<Customer>> searchCustomerByFirstName(@Valid @RequestParam(value="custFirstName") String custFirstName){
 		List<Customer> customers = customerService.searchCustomerByFirstname(custFirstName);
 		return ResponseEntity.ok(customers);
 	}
@@ -88,7 +90,7 @@ public class CustomerController {
 	 * Get Mapping for Customer by City
 	 */
 	@GetMapping(value="/customers/{custCity}")
-	public ResponseEntity<List<Customer>> searchCustomerByCity(@RequestParam(value="custCity") String custCity){
+	public ResponseEntity<List<Customer>> searchCustomerByCity(@Valid @RequestParam(value="custCity") String custCity){
 		List<Customer> customers = customerService.searchCustomerByCity(custCity);
 		return ResponseEntity.ok(customers);
 	}
