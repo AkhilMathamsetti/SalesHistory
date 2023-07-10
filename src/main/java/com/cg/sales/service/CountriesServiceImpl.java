@@ -41,16 +41,7 @@ public class CountriesServiceImpl implements CountriesService {
 	@Override
 	public Countries updateCountry(Integer countryId,Countries country) {
 		Countries existingCountry = getCountry(countryId);
-		
-		existingCountry.setCountryIsoCode(country.getCountryIsoCode());
-		existingCountry.setCountryName(country.getCountryName());
-		existingCountry.setCountryRegion(country.getCountryRegion());
-		existingCountry.setCountryRegionId(country.getCountryRegionId());
-		existingCountry.setCountrySubregion(country.getCountrySubregion());
-		existingCountry.setCountrySubregionId(country.getCountrySubregionId());
-		existingCountry.setCountryTotal(country.getCountryTotal());
-		existingCountry.setCountryTotalId(country.getCountryTotalId());
-		
+		existingCountry = country;
 		return countriesRepository.save(country);
 	}
 

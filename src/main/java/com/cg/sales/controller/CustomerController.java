@@ -59,10 +59,7 @@ public class CustomerController {
 	@PutMapping(value = "/customers/{custId}")
 	@ResponseStatus(value=HttpStatus.ACCEPTED, reason="Customer details Updated")
 	public Customer updateCustomer(@Valid @PathVariable Integer custId,@RequestBody Customer customer){
-				
-		Customer updatedCustomer= customerService.updateCustomer(custId, customer);
-		
-		return updatedCustomer;
+		return customerService.updateCustomer(custId, customer);
 	}
 	
 	
@@ -118,8 +115,7 @@ public class CustomerController {
 	@ResponseStatus(value=HttpStatus.OK,reason="Customer credit limit updated successfully")
 	public Customer updateCustomerCreditLimit(@PathVariable Integer custId,@RequestBody Customer customer){
 				
-		Customer updatedCustomer= customerService.updateCustomerCreditLimit(custId, customer);
-		return updatedCustomer;
+		return customerService.updateCustomerCreditLimit(custId, customer);
 	}
 	
 }

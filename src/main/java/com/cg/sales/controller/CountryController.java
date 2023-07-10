@@ -53,8 +53,7 @@ public class CountryController {
 	 */
 	@GetMapping(value="/countries")
 	public ResponseEntity<List<Countries>> getAllCountries(){
-		List<Countries> allCountries = countryService.getAllCountries();
-		return ResponseEntity.ok(allCountries);
+		return ResponseEntity.ok(countryService.getAllCountries());
 	}
 	
 	/*
@@ -72,11 +71,9 @@ public class CountryController {
 	@PutMapping(value="/countries/{countryId}")
 	@ResponseStatus(value=HttpStatus.ACCEPTED,reason="Country details updated successfuly")
 	public Countries updateCounty(@Valid @PathVariable Integer countryId,@RequestBody Countries country){
-		if(countryId == null) {
+		if(countryId == null)
 			throw new CountryNotFoundException("Please enter valid country ID");
-		}
-		Countries updatedCountry= countryService.updateCountry(countryId, country);
-		return updatedCountry;
+		return countryService.updateCountry(countryId, country);
 	}
 	
 	/*
@@ -91,11 +88,9 @@ public class CountryController {
 	@GetMapping(value="/countries/count")
 	public ResponseEntity<Map<String,Integer>> getCustomerCountByCountry(){
 		List<Countries> allCountries = countriesRepository.findAll();
-		if(allCountries.isEmpty()) {
+		if(allCountries.isEmpty())
 			throw new CountryNotFoundException("Countries count is not available");
-		}
-		Map<String,Integer> customerCountMap =  countryService.getCustomerCountByCountry();
-		return ResponseEntity.ok(customerCountMap);
+		return ResponseEntity.ok(countryService.getCustomerCountByCountry());
 	}
 	
 	
