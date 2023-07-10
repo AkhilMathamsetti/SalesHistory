@@ -45,8 +45,7 @@ public class ProductController {
 	@PostMapping(value="/products")
 	public ResponseEntity<Product> saveProduct(@RequestBody Product product){
 		Product savedProduct = productService.saveProduct(product);
-		ResponseEntity<Product> re = new ResponseEntity<Product>(savedProduct,HttpStatus.CREATED);
-		return re;
+		return new ResponseEntity<Product>(savedProduct,HttpStatus.CREATED);
 	}
 	
 	/*
@@ -55,8 +54,7 @@ public class ProductController {
 	@GetMapping(value="/products")
 	public ResponseEntity<List<Product>> getAllProducts() {
 		List<Product> allProducts=productService.getAllProducts();
-		ResponseEntity<List<Product>> re=new ResponseEntity<List<Product>>(allProducts,HttpStatus.OK);
-		return re;
+		return new ResponseEntity<List<Product>>(allProducts,HttpStatus.OK);
 	}
 	
 	/*
@@ -65,8 +63,7 @@ public class ProductController {
 	@GetMapping(value = "/products/{prodId}")
 	public ResponseEntity<Product> getProduct(@RequestParam(value="prodId") Integer prodId) {
 		Product product = productService.getProduct(prodId);
-		ResponseEntity<Product> re=new ResponseEntity<Product>(product,HttpStatus.OK);
-		return re;	
+		return new ResponseEntity<Product>(product,HttpStatus.OK);	
 	}
 	
 	/*
@@ -75,8 +72,7 @@ public class ProductController {
 	@DeleteMapping(value = "/products/{prodId}")
 	public ResponseEntity<String> deleteProduct(@RequestParam(value="prodId") Integer prodId){
 		productService.deleteProduct(prodId);
-		ResponseEntity<String> re=new ResponseEntity<String>("Product with Id:"+prodId+" Deleted Successfully!",HttpStatus.OK);
-		return re;		
+		return new ResponseEntity<String>("Product with Id:"+prodId+" Deleted Successfully!",HttpStatus.OK);		
 	}
 	
 	/*
@@ -84,9 +80,7 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/{prodCategory}")
 	public ResponseEntity<List<Product>> getProductByCategory(@RequestParam(value="prodCategory") String prodCategory){
-		
-		List<Product> products = productService.searchAllProductsByCategory(prodCategory);
-		return ResponseEntity.ok(products);
+		return ResponseEntity.ok(productService.searchAllProductsByCategory(prodCategory));
 	}
 	
 	/*
@@ -96,9 +90,7 @@ public class ProductController {
 	public ResponseEntity<List<Product>> getProductByStatus(@RequestParam(value="prodStatus") String prodStatus){
 		if(prodStatus != "STATUS")
 			throw new ProductNotFoundException("No data available for "+prodStatus);
-		
-		List<Product> products = productService.searchAllProductsByStatus(prodStatus);
-		return ResponseEntity.ok(products);
+		return ResponseEntity.ok(productService.searchAllProductsByStatus(prodStatus));
 	}
 	
 	/*
@@ -108,8 +100,7 @@ public class ProductController {
 	public ResponseEntity<List<Product>> getProductBySubcategory(@RequestParam(value="prodSubcategory") String prodSubcategory){
 		if(prodSubcategory ==  null)
 			throw new ProductNotFoundException("No data available");
-		List<Product> products = productService.searchAllProductsBySubcategory(prodSubcategory);
-		return ResponseEntity.ok(products);
+		return ResponseEntity.ok(productService.searchAllProductsBySubcategory(prodSubcategory));
 	}
 	
 	/*
@@ -119,9 +110,7 @@ public class ProductController {
 	public ResponseEntity<List<Product>> getProductBySupplierId(@RequestParam(value="supplierId") Integer supplierId){
 		if(supplierId ==  null)
 			throw new ProductNotFoundException("Please enter valid Supplier Id");
-		
-		List<Product> products = productService.searchAllProductsBySupplierId(supplierId);
-		return ResponseEntity.ok(products);
+		return ResponseEntity.ok(productService.searchAllProductsBySupplierId(supplierId));
 	}
 	
 	/*
@@ -139,8 +128,7 @@ public class ProductController {
 	public ResponseEntity<List<Product>> getSoldProducts(@RequestParam(value="prodId") Integer prodId){
 		if(prodId == null)
 			throw new ProductNotFoundException("Please Enter valid Product Id");
-		List<Product> products = productService.getStatusOfSoldProducts(prodId);
-		return ResponseEntity.ok(products);
+		return ResponseEntity.ok(productService.getStatusOfSoldProducts(prodId));
 	}
 	
 	
@@ -149,8 +137,7 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/channel")
 	public ResponseEntity<List<Object[]>> getProductsByChannel(){
-		List<Object[]> products = productService.getProductsByChannel();
-		return ResponseEntity.ok(products);
+		return ResponseEntity.ok(productService.getProductsByChannel());
 	}
 	
 	/*

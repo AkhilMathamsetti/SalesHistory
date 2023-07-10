@@ -95,14 +95,10 @@ public class CountryController {
 	
 	
 	@GetMapping(value="/countries/{region}/customers")
-	@ResponseBody
 	public List<CustomerCountRegion> getCustomersCountByRegion(@PathVariable(value="region") String region){
 		List<Countries> allCountries = countriesRepository.findAll(); 
-		if(allCountries.contains(region)) {
-			str = "Record succssfully showed";
-		}else {
-			str = "Record not found";
-		}
+		if(allCountries.contains(region))str = "Record succssfully showed";
+		else str = "Record not found";
 		return countriesRepository.getCustomersCountByRegion(region);
 	}
 	

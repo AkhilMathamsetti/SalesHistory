@@ -47,9 +47,7 @@ public class CustomerController {
 	 */
 	@GetMapping(value = "/customers")
 	public ResponseEntity<List<Customer>> getAllCustomers() {
-		List<Customer> allCustomers = customerService.getAllCustomers();
-		return ResponseEntity.ok(allCustomers);
-		
+		return ResponseEntity.ok(customerService.getAllCustomers());
 	}
 	
 	
@@ -88,8 +86,7 @@ public class CustomerController {
 	 */
 	@GetMapping(value="/customers/{custCity}")
 	public ResponseEntity<List<Customer>> searchCustomerByCity(@Valid @RequestParam(value="custCity") String custCity){
-		List<Customer> customers = customerService.searchCustomerByCity(custCity);
-		return ResponseEntity.ok(customers);
+		return ResponseEntity.ok(customerService.searchCustomerByCity(custCity));
 	}
 	
 	
@@ -98,14 +95,12 @@ public class CustomerController {
 	 */
 	@GetMapping(value="/customers/{custIncomeLevel}")
 	public ResponseEntity<List<Customer>> searchCustomerIncome(@RequestParam(value="custIncomeLevel") String custIncomeLevel){
-		List<Customer> customers = customerService.searchCustomerByIncome(custIncomeLevel);
-		return ResponseEntity.ok(customers);
+		return ResponseEntity.ok(customerService.searchCustomerByIncome(custIncomeLevel));
 	}
 	
 	@GetMapping(value="/customers/{custCreditLimit}")
 	public ResponseEntity<List<Customer>> searchCustomerByCreditLimit(@RequestParam(value="custCreditLimit") Integer custCreditLimit){
-		List<Customer> customers = customerService.searchCustomerByCreditLimit(custCreditLimit);
-		return ResponseEntity.ok(customers);
+		return ResponseEntity.ok(customerService.searchCustomerByCreditLimit(custCreditLimit));
 	}
 	
 	/*
@@ -114,7 +109,6 @@ public class CustomerController {
 	@PutMapping(value = "/customers/creditlimit/{custId}")
 	@ResponseStatus(value=HttpStatus.OK,reason="Customer credit limit updated successfully")
 	public Customer updateCustomerCreditLimit(@PathVariable Integer custId,@RequestBody Customer customer){
-				
 		return customerService.updateCustomerCreditLimit(custId, customer);
 	}
 	
