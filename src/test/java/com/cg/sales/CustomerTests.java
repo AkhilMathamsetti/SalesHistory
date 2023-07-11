@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.cg.sales.service.CustomerService;
+import com.cg.sales.services.CustomerService;
 
 
 @SpringBootTest
-public class CustomerTests {
+class CustomerTests {
 	private CustomerService customerService;
 	
 	@Autowired
@@ -19,17 +19,17 @@ public class CustomerTests {
 	}
 	
 	@Test
-	public void getAllCustomers() {
+	void getAllCustomers() {
 		assertNotNull(customerService.getAllCustomers());
 	}
 	
 	@Test
-	public void getCustomerFirstName() {
+	void getCustomerFirstName() {
 		assertNotNull(customerService.searchCustomerByFirstname("Anne"));
 	}
 	
 	@Test
-	public void getCustomerCity() {
+	void getCustomerCity() {
 		assertNotNull(customerService.searchCustomerByCity("Diss"));
 	}
 	

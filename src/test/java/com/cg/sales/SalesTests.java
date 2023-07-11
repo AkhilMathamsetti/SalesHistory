@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.cg.sales.repository.SalesRepository;
-import com.cg.sales.service.SalesService;
+import com.cg.sales.repositories.SalesRepository;
+import com.cg.sales.services.SalesService;
 
 @SpringBootTest
-public class SalesTests {
+class SalesTests {
 
 	@Autowired
 	private SalesService salesService;
@@ -29,17 +29,17 @@ public class SalesTests {
 	}
 	
 	@Test
-	public void getSales() {
+	void getSales() {
 		assertNotNull(salesService.getAllSales());
 	}
 	
 	@Test
-	public void testGetSalesByDate() {
+	void testGetSalesByDate() {
 		assertNotNull(salesRepository.getSalesByDate(24));
 	}
 	
 	@Test
-	public void testGetSalesByYear() {
+	void testGetSalesByYear() {
 		assertNotNull(salesRepository.getSalesByDate(2020));
 	}
 	
