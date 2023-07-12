@@ -3,8 +3,6 @@ package com.cg.sales.controllers;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -69,7 +67,7 @@ public class CountryController {
 	 */
 	@PutMapping(value="/countries/{countryId}")
 	@ResponseStatus(value=HttpStatus.ACCEPTED,reason="Country details updated successfuly")
-	public Countries updateCounty(@Valid @PathVariable Integer countryId,@RequestBody Countries countries){
+	public Countries updateCounty( @PathVariable Integer countryId,@RequestBody Countries countries){
 		if(countryId == null)
 			throw new CountryNotFoundException("Please enter valid country ID");
 		return countryService.updateCountry(countryId, countries);
@@ -86,8 +84,7 @@ public class CountryController {
 	
 	@GetMapping(value="/countries/count")
 	public ResponseEntity<Map<String,Integer>> getCustomerCountByCountry(){
-		List<Countries> allCountries = countriesRepository.findAll();
-		if(allCountries.isEmpty())
+		if(countriesRepository.findAll().isEmpty())
 			throw new CountryNotFoundException("Countries count is not available");
 		return ResponseEntity.ok(countryService.getCustomerCountByCountry());
 	}
@@ -95,8 +92,6 @@ public class CountryController {
 	
 	@GetMapping(value="/countries/{region}/customers")
 	public List<CustomerCountRegion> getCustomersCountByRegion(@PathVariable(value="region") String region){
-		if(countriesRepository.findAll().contains(region))str = "Record succssfully showed";
-		else str = "Record not found";
 		return countriesRepository.getCustomersCountByRegion(region);
 	}
 	

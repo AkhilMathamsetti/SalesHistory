@@ -13,5 +13,4 @@ class SalesHistoryApplicationTests {
 	void contextLoads(ApplicationContext context) {
 		assertThat(context).isNotNull();
 	}
-
 }

@@ -77,7 +77,6 @@ public class Customer {
 	
 	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name="country_id")
-	@NotNull(message="Country Id may not be null")
 	private Countries country;
 	
 	@Column(name="cust_main_phone_INT",columnDefinition = "varchar(40)")

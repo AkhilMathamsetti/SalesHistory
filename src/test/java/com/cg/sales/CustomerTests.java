@@ -32,7 +32,4 @@ class CustomerTests {
 	void getCustomerCity() {
 		assertNotNull(customerService.searchCustomerByCity("Diss"));
 	}
-	
-	
-
 }

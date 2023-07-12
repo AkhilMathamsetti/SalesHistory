@@ -12,6 +12,5 @@ public interface CountriesService {
 	public Countries updateCountry(Integer countryId,Countries country);
 	public Countries getCountry(Integer countryId);
 	public void deleteCountry(Integer countryId);
-	
 	public Map<String, Integer> getCustomerCountByCountry();
 }
