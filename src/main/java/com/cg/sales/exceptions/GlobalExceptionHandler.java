@@ -1,5 +1,7 @@
 package com.cg.sales.exceptions;
 
+import java.util.Date;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,23 +11,27 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(CustomerNotFoundException.class)
-	public ResponseEntity<String> handleCustomerNotFoundException(CustomerNotFoundException cnfe){
-		return new ResponseEntity<>(cnfe.getMessage(),HttpStatus.NOT_FOUND);
-	}
-	
-	@ExceptionHandler(ProductNotFoundException.class)
-	public ResponseEntity<String> handleProductNotFoundException(ProductNotFoundException pnfe){
-		return new ResponseEntity<>(pnfe.getMessage(),HttpStatus.NOT_FOUND);
+	public ResponseEntity<ErrorResponse> handleCustomerNotFoundException(CustomerNotFoundException cnfe){
+		ErrorResponse errorResponse = new ErrorResponse(new Date(),cnfe.getMessage(),HttpStatus.NOT_FOUND.toString());
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(CountryNotFoundException.class)
-	public ResponseEntity<String> handleCountryNotFoundException(CountryNotFoundException cnfe){
-		return new ResponseEntity<>(cnfe.getMessage(),HttpStatus.NOT_FOUND);
+	public ResponseEntity<ErrorResponse> handleCountryNotFoundException(CustomerNotFoundException cnfe){
+		ErrorResponse errorResponse = new ErrorResponse(new Date(),cnfe.getMessage(),HttpStatus.NOT_FOUND.toString());
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(ProductNotFoundException.class)
+	public ResponseEntity<ErrorResponse> handleProductNotFoundException(CustomerNotFoundException cnfe){
+		ErrorResponse errorResponse = new ErrorResponse(new Date(),cnfe.getMessage(),HttpStatus.NOT_FOUND.toString());
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(SalesNotFoundException.class)
-	public ResponseEntity<String> handleSalesNotFoundException(SalesNotFoundException snfe){
-		return new ResponseEntity<>(snfe.getMessage(),HttpStatus.NOT_FOUND);
+	public ResponseEntity<ErrorResponse> handleSalesNotFoundException(CustomerNotFoundException cnfe){
+		ErrorResponse errorResponse = new ErrorResponse(new Date(),cnfe.getMessage(),HttpStatus.NOT_FOUND.toString());
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 	
 	

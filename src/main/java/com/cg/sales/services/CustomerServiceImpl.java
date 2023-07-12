@@ -36,8 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public List<Customer> searchCustomerByFirstname(String custFirstName) {
-		List<Customer> customer=customerRepository.findByCustFirstName(custFirstName);
-		if(customer.isEmpty()) {
+		if(customerRepository.findByCustFirstName(custFirstName).isEmpty()) {
 			throw new CustomerNotFoundException("Customer with Firstname: "+custFirstName+" not available ");
 		}
 		return customerRepository.findByCustFirstName(custFirstName);
@@ -47,8 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public List<Customer> searchCustomerByCity(String custCity) {
-		List<Customer> customer=customerRepository.findByCustCity(custCity);
-		if(customer.isEmpty()) {
+		if(customerRepository.findByCustCity(custCity).isEmpty()) {
 			throw new CustomerNotFoundException("Customer with City: "+custCity+" not available ");
 		}
 		
@@ -70,8 +68,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> searchCustomerByIncome(String custIncomeLevel) {
-		List<Customer> customers = customerRepository.findByCustIncomeLevel(custIncomeLevel);
-		if(customers.isEmpty()) {
+		if(customerRepository.findByCustIncomeLevel(custIncomeLevel).isEmpty()) {
 			throw new CustomerNotFoundException("CUstomer with income level: "+custIncomeLevel+",is not avialable");
 		}
 		return customerRepository.findByCustIncomeLevel(custIncomeLevel);
@@ -86,8 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> searchCustomerByCreditLimit(Integer custCreditLimit) {
-		List<Customer> customer = customerRepository.findByCustCreditLimit(custCreditLimit);
-		if(customer.isEmpty()) {
+		if(customerRepository.findByCustCreditLimit(custCreditLimit).isEmpty()) {
 			throw new CustomerNotFoundException("Customer with Credit limit: "+custCreditLimit+",is not avialable");
 		}
 		return customerRepository.findByCustCreditLimit(custCreditLimit);
