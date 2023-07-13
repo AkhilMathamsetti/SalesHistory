@@ -75,19 +75,15 @@ public class ProductServiceImpl implements ProductService {
          List<Product> allProducts = productRepository.findAll();
             Map<String, Integer> productCountMap = new HashMap<>();
             List<Product> duplicateProducts = new ArrayList<>();
-
             for (Product product : allProducts) {
                 String productName = product.getProdName();
                 productCountMap.put(productName, productCountMap.getOrDefault(productName, 0) + 1);
             }
-
             for (Product product : allProducts) {
                 String productName = product.getProdName();
-                if (productCountMap.get(productName) > 1 && !duplicateProducts.contains(product)) {
+                if (productCountMap.get(productName) > 1 && !duplicateProducts.contains(product))
                     duplicateProducts.add(product);
-                }
             }
-
             return duplicateProducts;
     }
 
@@ -100,5 +96,4 @@ public class ProductServiceImpl implements ProductService {
 	public List<Object[]> getProductsByChannel() {
 		return productRepository.getProductsByChannel();
 	}
-
 }

@@ -41,11 +41,6 @@ public class CountryController {
 	}
 	
 	/*
-	 * Instance Variables
-	 */
-	String str = null;
-	
-	/*
 	 * Getting All Countries
 	 */
 	@GetMapping(value="/countries")

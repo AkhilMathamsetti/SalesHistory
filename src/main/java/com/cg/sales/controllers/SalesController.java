@@ -48,7 +48,7 @@ public class SalesController {
 	public ResponseEntity<List<Sales>> getSalesByQuarter(@RequestParam(value="quarter") int quarter){
 		List<Sales> salesList = salesService.getSalesByQuater(quarter);
 		if(salesList.isEmpty())
-			throw new SalesNotFoundException("Sale with given quarter: "+quarter+",is not present");
+			throw new SalesNotFoundException("Sale with given quarter: "+quarter+" is not present");
 		return ResponseEntity.ok(salesList);
 	}
 	
@@ -56,7 +56,7 @@ public class SalesController {
 	public ResponseEntity<List<Sales>> getSalesByDate(@RequestParam(value="date") int date){
 		List<Sales> salesList = salesService.getSalesByDate(date);
 		if(salesList.isEmpty())
-			throw new SalesNotFoundException("Sale with given date: "+date+",is unavailable");
+			throw new SalesNotFoundException("Sale with given date: "+date+" is unavailable");
 		return ResponseEntity.ok(salesList);
 	}
 	
@@ -69,7 +69,7 @@ public class SalesController {
 	public List<SalesQtysCategoryYear> getSalesQuantitesByCategoryYear(@PathVariable("year") int year){
 		List<SalesQtysCategoryYear> salesList = salesRepository.getSalesQuantitiesByCategoryYear(year);
 		if(salesList.isEmpty())
-			throw new SalesNotFoundException("Sale with given quarter: "+year+",is not present");
+			throw new SalesNotFoundException("Sale with given quarter: "+year+" is not present");
 		return salesRepository.getSalesQuantitiesByCategoryYear(year);
 	}
 	
@@ -82,8 +82,7 @@ public class SalesController {
 	public List<SalesSoldCategoryYear> getSalesSoldByCategoryYear(@PathVariable("year") int year){
 		List<SalesSoldCategoryYear> salesList = salesRepository.getSalesSoldCategoryYear(year);
 		if(salesList.isEmpty())
-			throw new SalesNotFoundException("Sale with given quarter: "+year+",is not present");
+			throw new SalesNotFoundException("Sale with given quarter: "+year+" is not present");
 		return salesRepository.getSalesSoldCategoryYear(year);
 	}
-	
 }

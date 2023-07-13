@@ -36,9 +36,8 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public List<Customer> searchCustomerByFirstname(String custFirstName) {
-		if(customerRepository.findByCustFirstName(custFirstName).isEmpty()) {
+		if(customerRepository.findByCustFirstName(custFirstName).isEmpty())
 			throw new CustomerNotFoundException("Customer with Firstname: "+custFirstName+" not available ");
-		}
 		return customerRepository.findByCustFirstName(custFirstName);
 	}
 
@@ -46,10 +45,8 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public List<Customer> searchCustomerByCity(String custCity) {
-		if(customerRepository.findByCustCity(custCity).isEmpty()) {
+		if(customerRepository.findByCustCity(custCity).isEmpty())
 			throw new CustomerNotFoundException("Customer with City: "+custCity+" not available ");
-		}
-		
 		return customerRepository.findByCustCity(custCity);
 	}
 	
@@ -68,9 +65,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> searchCustomerByIncome(String custIncomeLevel) {
-		if(customerRepository.findByCustIncomeLevel(custIncomeLevel).isEmpty()) {
-			throw new CustomerNotFoundException("CUstomer with income level: "+custIncomeLevel+",is not avialable");
-		}
+		if(customerRepository.findByCustIncomeLevel(custIncomeLevel).isEmpty())
+			throw new CustomerNotFoundException("Customer with income level: "+custIncomeLevel+" is not avialable");
 		return customerRepository.findByCustIncomeLevel(custIncomeLevel);
 	}
 
@@ -83,10 +79,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> searchCustomerByCreditLimit(Integer custCreditLimit) {
-		if(customerRepository.findByCustCreditLimit(custCreditLimit).isEmpty()) {
-			throw new CustomerNotFoundException("Customer with Credit limit: "+custCreditLimit+",is not avialable");
-		}
+		if(customerRepository.findByCustCreditLimit(custCreditLimit).isEmpty())
+			throw new CustomerNotFoundException("Customer with Credit limit: "+custCreditLimit+" is not avialable");
 		return customerRepository.findByCustCreditLimit(custCreditLimit);
 	}
-
 }

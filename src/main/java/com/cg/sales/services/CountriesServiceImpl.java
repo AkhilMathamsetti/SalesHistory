@@ -65,7 +65,6 @@ public class CountriesServiceImpl implements CountriesService {
 			Long customerCount = (Long) row[1];
 			customerCountMap.put(countryName,customerCount.intValue());
 		}
-		
 		return customerCountMap;
 	}
 }

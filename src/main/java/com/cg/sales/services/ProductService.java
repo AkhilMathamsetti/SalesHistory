@@ -15,10 +15,7 @@ public interface ProductService {
 	public List<Product> searchAllProductsByStatus(String prodStatus);
 	public List<Product> searchAllProductsBySubcategory(String prodSubcategory);
 	public List<Product> searchAllProductsBySupplierId(Integer supplierId);
-	
 	public List<Product> searchAllDuplicateProducts();
-	
 	public List<Product> getStatusOfSoldProducts(Integer prodId);
-	
 	public List<Object[]> getProductsByChannel();
 }

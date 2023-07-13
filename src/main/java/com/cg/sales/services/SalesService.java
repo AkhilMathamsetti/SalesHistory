@@ -8,8 +8,6 @@ public interface SalesService {
 
 	public List<Sales> getAllSales();
 	public List<Integer> getById();
-	
 	public List<Sales> getSalesByQuater(int quarter);
-	
 	public List<Sales> getSalesByDate(int date);
 }
