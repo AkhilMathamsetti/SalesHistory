@@ -75,7 +75,7 @@ public class Customer {
 	@NotNull(message = "State Province may not be null")
 	private int custStateProvinceId;
 	
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne(cascade = CascadeType.ALL,optional = false)
 	@JoinColumn(name="country_id")
 	private Countries country;
 	
