@@ -2,19 +2,44 @@ package com.cg.sales.exceptions;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
 public class ErrorResponse {
 
 	private Date date;
 	private String message;
 	private String status;
 	
+	public ErrorResponse(Date date, String message, String status) {
+		super();
+		this.date = date;
+		this.message = message;
+		this.status = status;
+	}
+	
+	public ErrorResponse() {
+		
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }
