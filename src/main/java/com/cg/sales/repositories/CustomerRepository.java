@@ -20,6 +20,4 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
 	@Query("SELECT c.country.countryName, COUNT(c) FROM Customer c GROUP BY c.country.countryId")
 	List<Object[]> getCustomerCountByCountry();
-	
-	
 }

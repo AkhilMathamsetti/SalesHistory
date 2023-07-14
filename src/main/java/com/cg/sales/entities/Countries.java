@@ -2,8 +2,6 @@ package com.cg.sales.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -27,7 +25,6 @@ import lombok.ToString;
 public class Countries {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@NotNull(message = "Country id may not be null")
 	private int countryId;
 	
