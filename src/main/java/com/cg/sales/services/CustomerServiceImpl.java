@@ -21,7 +21,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer saveCustomer(Customer customer) {
-		return customerRepository.save(customer);
+		if(customerRepository.findByCustId(customer.getCustId()).isEmpty()) return customerRepository.save(customer);
+		throw new CustomerNotFoundException("Customer already exists");
 	}
 
 	@Override
@@ -41,8 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.findByCustFirstName(custFirstName);
 	}
 
-	
-	
+
 	@Override
 	public List<Customer> searchCustomerByCity(String custCity) {
 		if(customerRepository.findByCustCity(custCity).isEmpty())
