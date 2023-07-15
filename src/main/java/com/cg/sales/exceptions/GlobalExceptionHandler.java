@@ -16,20 +16,20 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(CountryNotFoundException.class)
-	public ResponseEntity<ErrorResponse> handleCountryNotFoundException(CustomerNotFoundException cnfe){
+	public ResponseEntity<ErrorResponse> handleCountryNotFoundException(CountryNotFoundException cnfe){
 		ErrorResponse errorResponse = new ErrorResponse(new Date(),cnfe.getMessage(),HttpStatus.NOT_FOUND.toString());
 		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(ProductNotFoundException.class)
-	public ResponseEntity<ErrorResponse> handleProductNotFoundException(CustomerNotFoundException cnfe){
-		ErrorResponse errorResponse = new ErrorResponse(new Date(),cnfe.getMessage(),HttpStatus.NOT_FOUND.toString());
+	public ResponseEntity<ErrorResponse> handleProductNotFoundException(ProductNotFoundException pnfe){
+		ErrorResponse errorResponse = new ErrorResponse(new Date(),pnfe.getMessage(),HttpStatus.NOT_FOUND.toString());
 		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(SalesNotFoundException.class)
-	public ResponseEntity<ErrorResponse> handleSalesNotFoundException(CustomerNotFoundException cnfe){
-		ErrorResponse errorResponse = new ErrorResponse(new Date(),cnfe.getMessage(),HttpStatus.NOT_FOUND.toString());
+	public ResponseEntity<ErrorResponse> handleSalesNotFoundException(SalesNotFoundException snfe){
+		ErrorResponse errorResponse = new ErrorResponse(new Date(),snfe.getMessage(),HttpStatus.NOT_FOUND.toString());
 		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 	
