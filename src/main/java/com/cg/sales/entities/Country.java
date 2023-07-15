@@ -22,7 +22,7 @@ import lombok.ToString;
 @Entity
 @Table(name="countries")
 
-public class Countries {
+public class Country {
 	
 	@Id
 	@NotNull(message = "Country id may not be null")

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.sales.dto.CustomerCountRegion;
-import com.cg.sales.entities.Countries;
+import com.cg.sales.entities.Country;
 import com.cg.sales.exceptions.CountryNotFoundException;
 import com.cg.sales.repositories.CountriesRepository;
 import com.cg.sales.services.CountriesService;
@@ -44,7 +44,7 @@ public class CountryController {
 	 * Getting All Countries
 	 */
 	@GetMapping(value="/countries")
-	public ResponseEntity<List<Countries>> getAllCountries(){
+	public ResponseEntity<List<Country>> getAllCountries(){
 		return ResponseEntity.ok(countryService.getAllCountries());
 	}
 	
@@ -53,7 +53,7 @@ public class CountryController {
 	 */
 	@PostMapping(value="/countries")
 	@ResponseStatus(value=HttpStatus.OK,reason="Country record created successfully")
-	public Countries saveCountry(@RequestBody Countries countries){
+	public Country saveCountry(@RequestBody Country countries){
 		return countryService.saveCountries(countries);
 	}
 	
@@ -62,7 +62,7 @@ public class CountryController {
 	 */
 	@PutMapping(value="/countries/{countryId}")
 	@ResponseStatus(value=HttpStatus.ACCEPTED,reason="Country details updated successfuly")
-	public Countries updateCounty( @PathVariable Integer countryId,@RequestBody Countries countries){
+	public Country updateCounty( @PathVariable Integer countryId,@RequestBody Country countries){
 		if(countryId == null)
 			throw new CountryNotFoundException("Please enter valid country ID");
 		return countryService.updateCountry(countryId, countries);
@@ -87,14 +87,11 @@ public class CountryController {
 	
 	@GetMapping(value="/countries/{region}/customers")
 	public List<CustomerCountRegion> getCustomersCountByRegion(@PathVariable(value="region") String region){
-		List<Countries> allCountries = countriesRepository.findAll();
+		List<Country> allCountries = countriesRepository.findAll();
 		
-		for (Countries countries : allCountries) {
-			if(countries.getCountryRegion().contains(region)) {
-				return countriesRepository.getCustomersCountByRegion(region);
-			}else {
-				 throw new CountryNotFoundException("Country count is Unavailable with :"+region);
-			}
+		for (Country countries : allCountries) {
+			if(countries.getCountryRegion().contains(region)) return countriesRepository.getCustomersCountByRegion(region);
+			else throw new CountryNotFoundException("Country count is Unavailable with :"+region);
 		}
 		return countriesRepository.getCustomersCountByRegion(region);
 	}

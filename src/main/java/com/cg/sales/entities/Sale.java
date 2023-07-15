@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name="sales")
-public class Sales {
+public class Sale {
 
 	@Id
 	@Column(name="sales_id")

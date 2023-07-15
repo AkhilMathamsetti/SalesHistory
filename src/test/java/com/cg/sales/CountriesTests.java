@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.cg.sales.entities.Countries;
+import com.cg.sales.entities.Country;
 import com.cg.sales.services.CountriesService;
 
 @SpringBootTest

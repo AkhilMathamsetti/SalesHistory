@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.sales.entities.Sales;
+import com.cg.sales.entities.Sale;
 import com.cg.sales.repositories.SalesRepository;
 
 @Service
@@ -19,7 +19,7 @@ public class SalesServiceImpl implements SalesService {
 	}
 	
 	@Override
-	public List<Sales> getAllSales() {
+	public List<Sale> getAllSales() {
 		return salesRepository.findAll();
 	}
 	
@@ -29,12 +29,12 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public List<Sales> getSalesByQuater(int quarter) {
+	public List<Sale> getSalesByQuater(int quarter) {
 		return salesRepository.getSalesByQuater(quarter);
 	}
 
 	@Override
-	public List<Sales> getSalesByDate(int date) {
+	public List<Sale> getSalesByDate(int date) {
 		return salesRepository.getSalesByDate(date);
 	}
 

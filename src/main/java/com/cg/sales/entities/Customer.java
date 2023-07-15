@@ -74,7 +74,7 @@ public class Customer {
 	
 	@ManyToOne(cascade = CascadeType.ALL,optional = false)
 	@JoinColumn(name="country_id")
-	private Countries country;
+	private Country country;
 	
 	@Column(name="cust_main_phone_INT",columnDefinition = "varchar(40)")
 	@NotEmpty(message = "Customer Phone may not be null")

@@ -15,7 +15,7 @@ import com.cg.sales.dto.SalesQtysCategory;
 import com.cg.sales.dto.SalesQtysCategoryYear;
 import com.cg.sales.dto.SalesSoldCategory;
 import com.cg.sales.dto.SalesSoldCategoryYear;
-import com.cg.sales.entities.Sales;
+import com.cg.sales.entities.Sale;
 import com.cg.sales.exceptions.SalesNotFoundException;
 import com.cg.sales.repositories.SalesRepository;
 import com.cg.sales.services.SalesService;
@@ -38,23 +38,23 @@ public class SalesController {
 	}
 	
 	@GetMapping(value="")
-	public ResponseEntity<List<Sales>> getAllSaleRecords(){
-		List<Sales> allSales = salesService.getAllSales();
-		return new ResponseEntity<List<Sales>>(allSales, HttpStatus.OK);
+	public ResponseEntity<List<Sale>> getAllSaleRecords(){
+		List<Sale> allSales = salesService.getAllSales();
+		return new ResponseEntity<List<Sale>>(allSales, HttpStatus.OK);
 	}
 	
 	
 	@GetMapping(value="/{quarter}")
-	public ResponseEntity<List<Sales>> getSalesByQuarter(@RequestParam(value="quarter") int quarter){
-		List<Sales> salesList = salesService.getSalesByQuater(quarter);
+	public ResponseEntity<List<Sale>> getSalesByQuarter(@RequestParam(value="quarter") int quarter){
+		List<Sale> salesList = salesService.getSalesByQuater(quarter);
 		if(salesList.isEmpty())
 			throw new SalesNotFoundException("Sale with given quarter: "+quarter+" is not present");
 		return ResponseEntity.ok(salesList);
 	}
 	
 	@GetMapping(value="/{date}")
-	public ResponseEntity<List<Sales>> getSalesByDate(@RequestParam(value="date") int date){
-		List<Sales> salesList = salesService.getSalesByDate(date);
+	public ResponseEntity<List<Sale>> getSalesByDate(@RequestParam(value="date") int date){
+		List<Sale> salesList = salesService.getSalesByDate(date);
 		if(salesList.isEmpty())
 			throw new SalesNotFoundException("Sale with given date: "+date+" is unavailable");
 		return ResponseEntity.ok(salesList);
