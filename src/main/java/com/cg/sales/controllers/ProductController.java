@@ -60,8 +60,8 @@ public class ProductController {
 	 */
 	@GetMapping(value = "/products/{prodId}")
 	public ResponseEntity<Product> getProduct(@RequestParam(value="prodId") Integer prodId) {
-		Product product = productService.getProduct(prodId);
-		return new ResponseEntity<Product>(product,HttpStatus.OK);	
+		if(productRepository.findById(prodId).isEmpty()) throw new ProductNotFoundException("Product Id: "+prodId+", is not available");
+		else return ResponseEntity.ok(productService.getProduct(prodId));	
 	}
 	
 	/*
@@ -78,7 +78,8 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/{prodCategory}")
 	public ResponseEntity<List<Product>> getProductByCategory(@RequestParam(value="prodCategory") String prodCategory){
-		return ResponseEntity.ok(productService.searchAllProductsByCategory(prodCategory));
+		if(productService.searchAllProductsByCategory(prodCategory).isEmpty()) throw new ProductNotFoundException("Product Category is not present");
+		else return ResponseEntity.ok(productService.searchAllProductsByCategory(prodCategory));
 	}
 	
 	/*
@@ -86,9 +87,8 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/{prodStatus}")
 	public ResponseEntity<List<Product>> getProductByStatus(@RequestParam(value="prodStatus") String prodStatus){
-		if(prodStatus.equals(prodStatus))
-			return ResponseEntity.ok(productService.searchAllProductsByStatus(prodStatus));
-		else throw new ProductNotFoundException("No data available for "+prodStatus);
+		if(productService.searchAllProductsByStatus(prodStatus).isEmpty()) throw new ProductNotFoundException("Poduct with Status:"+prodStatus+"is empty");
+		else return ResponseEntity.ok(productService.searchAllProductsByStatus(prodStatus));
 	}
 	
 	/*
@@ -96,9 +96,8 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/{prodSubcategory}")
 	public ResponseEntity<List<Product>> getProductBySubcategory(@RequestParam(value="prodSubcategory") String prodSubcategory){
-		if(prodSubcategory ==  null)
-			throw new ProductNotFoundException("No data available");
-		return ResponseEntity.ok(productService.searchAllProductsBySubcategory(prodSubcategory));
+		if(productService.searchAllProductsBySubcategory(prodSubcategory).isEmpty())throw new ProductNotFoundException("No data available");
+		else return ResponseEntity.ok(productService.searchAllProductsBySubcategory(prodSubcategory));
 	}
 	
 	/*
@@ -106,9 +105,8 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/{supplierId}")
 	public ResponseEntity<List<Product>> getProductBySupplierId(@RequestParam(value="supplierId") Integer supplierId){
-		if(supplierId ==  null)
-			throw new ProductNotFoundException("Please enter valid Supplier Id");
-		return ResponseEntity.ok(productService.searchAllProductsBySupplierId(supplierId));
+		if(productService.searchAllProductsBySupplierId(supplierId).isEmpty()) throw new ProductNotFoundException("Please enter valid Supplier Id");
+		else return ResponseEntity.ok(productService.searchAllProductsBySupplierId(supplierId));
 	}
 	
 	/*
@@ -124,9 +122,8 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/status/{prodId}")
 	public ResponseEntity<List<Product>> getSoldProducts(@RequestParam(value="prodId") Integer prodId){
-		if(prodId == null)
-			throw new ProductNotFoundException("Please Enter valid Product Id");
-		return ResponseEntity.ok(productService.getStatusOfSoldProducts(prodId));
+		if(productService.getStatusOfSoldProducts(prodId).isEmpty()) throw new ProductNotFoundException("Please Enter valid Product Id");
+		else return ResponseEntity.ok(productService.getStatusOfSoldProducts(prodId));
 	}
 	
 	
@@ -143,8 +140,7 @@ public class ProductController {
 	 */
 	@GetMapping(value="/products/sort/{field}")
 	public ResponseEntity<List<Product>> getSortProductsByField(@PathVariable("field") String sortField){
-		if(sortField == null)
-			throw new ProductNotFoundException("Please enter valid Field String in the URL"); 
+		if(productRepository.findAll().isEmpty()) throw new ProductNotFoundException("Please enter valid Field String in the URL"); 
 		Sort sort = Sort.by(sortField);
 		return ResponseEntity.ok(productRepository.findAll(sort));
 	}
