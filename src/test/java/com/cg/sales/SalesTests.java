@@ -2,9 +2,6 @@ package com.cg.sales;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.sql.Date;
-
-import org.hibernate.validator.constraints.br.TituloEleitoral;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,6 +38,11 @@ class SalesTests {
 	@Test
 	void testGetSalesByYear() {
 		assertNotNull(salesRepository.getSalesByDate(2020));
+	}
+	
+	@Test
+	void testGetSalesByMonth() {
+		assertNotNull(salesRepository.getSalesByQuater(2));
 	}
 	
 }

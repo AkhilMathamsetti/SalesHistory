@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.cg.sales.entities.Countries;
 import com.cg.sales.services.CountriesService;
 
 @SpringBootTest
@@ -27,4 +28,10 @@ class CountriesTests {
 	void testGetCountryById() {
 		assertNotNull(countriesService.getCountry(52769));
 	}
+	
+	@Test
+	void testCountCountry() {
+		assertNotNull(countriesService.getCustomerCountByCountry());
+	}
+	
 }
