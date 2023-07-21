@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sh-deployment
+  labels:
+    app: sh-app
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sh-app
+  template:
+    metadata:
+      labels:
+        app: sh-app
+    spec:
+      containers:
+      - name: sh-container
+        image: dattasameer/sales-image
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sh-service
+spec:
+  selector:
+    app: sh-app
+  namespace: my-name-space
+spec:
+  selector:
+    app: sh-app
+  type: LoadBalancer
+  ports:
+    - protocol: "TCP"
+      port: 8080
+      targetPort: 8080
